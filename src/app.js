@@ -11,6 +11,17 @@ const app = express()
 app.use(express.json())
 
 
+const cors = require("cors") 
+
+
+app.use(cors({
+
+origin : "http://localhost:3000" ,
+
+credentials : true 
+
+}))
+
 app.get("/" , (req , res)=> {
 
 
@@ -18,7 +29,6 @@ res.send("Server is working")
 
 
 })
-
 
 
 
