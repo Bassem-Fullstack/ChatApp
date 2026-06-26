@@ -15,7 +15,7 @@ const connectDB = require("./src/config/db")
 connectDB()
 
 
-const Message = require("../server/src/models/message")
+const Message = require("./src/models/message")
 
 const jwt = require("jsonwebtoken")
 
