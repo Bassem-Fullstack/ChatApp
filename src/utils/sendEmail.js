@@ -9,8 +9,8 @@ const sendEmail = async(options) => {
  const transPort = nodemailer.createTransport({
 
   //  service : "gmail", // اسم سيرفر او خدمة هتبعت على اية بقولوة على جيميل 
-   port: 465,
-    secure: true,
+   port: 587,
+    secure:  false,
    auth : {
 
     //  بكتب الهوية بتاعتي لاني انا بكلم جيميل بكتب الاميل والباسورد بتاعي بتاع جيميل بس باسورد مش بكتب باسورد بتاعي حقيقي عشان ممكن اي ويب سايت ياخد حسابي ويهكروة دي الطريقة الصح بتاع شركات
