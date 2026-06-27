@@ -5,15 +5,6 @@ const dotenv = require("dotenv")
 
 dotenv.config()
 
-// الكود ده بيقفش أي كراش مفاجئ ويمنع السيرفر إنه يقفل (SIGTERM)
-process.on("uncaughtException", (err) => {
-    console.error("❌ حصل كراش مفاجئ في الكود:", err.message);
-    console.error(err.stack);
-});
-
-process.on("unhandledRejection", (reason, promise) => {
-    console.error("❌ حصل رفض غير معالج لوعد (Promise):", reason);
-});
 
 const http = require("http") 
 
@@ -25,9 +16,6 @@ const connectDB = require("./src/config/db")
 
 connectDB()
 
-console.log("=== فحص المتغيرات البيئية ===");
-console.log("Email:", process.env.Email_Gmail);
-console.log("Password:", process.env.Password_Gmail ? "موجود" : "مش موجود");
 
 const app = require("./src/app")
 

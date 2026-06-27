@@ -16,11 +16,7 @@ const cors = require("cors")
 
 app.use(cors({
 
-origin : ["http://localhost:3000",
-
-"https://chatapp-test-6daa.up.railway.app"
-    
-] , 
+origin : ["http://localhost:3000"] , 
 
 
 credentials : true 
