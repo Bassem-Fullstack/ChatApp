@@ -39,7 +39,7 @@ res.send("Server is working")
 
 
 
-const UserRouters = require("../src/routes/authRoutes")
+const UserRouters = require("./routes/authRoutes")
 
 
 app.use("/users" , UserRouters)
@@ -48,7 +48,7 @@ app.use("/users" , UserRouters)
 ////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
 
-const ConversationRouters = require("../src/routes/conversationRoutes")
+const ConversationRouters = require("./routes/conversationRoutes")
 
 
 app.use("/conv" , ConversationRouters)
@@ -58,7 +58,7 @@ app.use("/conv" , ConversationRouters)
 ///////////////////////////////////////////////////////////////////////////////////////// 
 
 
-const MessageRouters = require("../src/routes/messageRoutes")
+const MessageRouters = require("./routes/messageRoutes")
 
 
 app.use("/messages" , MessageRouters)
@@ -68,7 +68,7 @@ app.use("/messages" , MessageRouters)
 
 
 
-const UserSearchRouter = require("../src/routes/userRoutes")
+const UserSearchRouter = require("./routes/userRoutes")
 
 
 app.use("/people" , UserSearchRouter)
