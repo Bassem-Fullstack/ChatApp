@@ -39,7 +39,7 @@ res.send("Server is working")
 
 
 
-const UserRouters = require("../src/routes/authRoutes")
+const UserRouters = require("./src/routes/authRoutes")
 
 
 app.use("/users" , UserRouters)
