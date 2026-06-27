@@ -96,41 +96,34 @@
 
 
 
-// 1. هنا بنستدعي مكتبة بريفو اللي نزلناها علشان نقدر نستخدم الفونكشنز بتاعتها
+
+// 1. الاستدعاء الصحيح للمكتبة في الإصدار الجديد
 const Brevo = require('@getbrevo/brevo');
 
-// 2. دي الفونكشن الأساسية اللي بتاخد الـ options (زي الـ to والـ subject والـ text)
 const sendEmail = async (options) => {
   
-  // 3. السطرين دول بنعرف بيهم المكتبة على حسابك، وبنمررلها الـ API_KEY اللي حطيناه على Railway
+  // 2. تفعيل خط الاتصال بالمكتبة بالشكل الجديد
   let defaultClient = Brevo.ApiClient.instance;
-  let apiKey = defaultClient.authentications['api-key'];
-  apiKey.apiKey = process.env.BREVO_API_KEY; 
-
-  // 4. هنا بنعمل "نسخة" أو اوبجكت جديد مخصص لإرسال إيميلات المعاملات (Transactional Emails) زي تفعيل الحساب
-  let apiInstance = new Brevo.TransactionalEmailsApi();
   
-  // 5. وهنا بنعمل اوبجكت جديد عشان نملى فيه بيانات الإيميل نفسه (العنوان، النص، مين بيبعت ومين بيستقبل)
+  // 3. تركيب المفتاح السري (API Key)
+  let apiKey = defaultClient.authentications['api-key'];
+  apiKey.apiKey = process.env.BREVO_API_KEY;
+
+  // بقية الكود زي ما هو بالظبط بدون أي تغيير 👇
+  let apiInstance = new Brevo.TransactionalEmailsApi();
   let sendSmtpEmail = new Brevo.SendSmtpEmail();
 
-  // 6. بنحط عنوان الإيميل اللي جاي لنا من برة الفونكشن
   sendSmtpEmail.subject = options.subject; 
-  
-  // 7. بنحط نص الرسالة أو اللينك اللي هيروح للمستخدم
   sendSmtpEmail.textContent = options.text; 
   
-  // 8. هنا بنحدد اسم وتفاصيل المرسل (أنت)، وبياخد إيميل الجيميل بتاعك اللي متخزن في الـ Variables
   sendSmtpEmail.sender = { 
     "name": "Chat App Support", 
     "email": process.env.Email_Gmail 
   };
   
-  // 9. هنا بنحدد المستلم، ولاحظ إنه مكتوب جوة أقواس مصفوفة [ ] لأن بريفو يقدر يبعت لكذا شخص في نفس الوقت
   sendSmtpEmail.to = [{ "email": options.to }];
 
-  // 10. السطر السحري! هنا بنقول لبريفو ابعت الإيميل ده فوراً، والعملية دي بتم عبر بورت 443 المفتوح دايماً
   await apiInstance.sendTransacEmail(sendSmtpEmail);
 };
 
-// 11. بنعمل export للفونكشن عشان تقدر تستدعيها وتستخدمها في ملف الـ auth أو الـ register
 module.exports = sendEmail;
