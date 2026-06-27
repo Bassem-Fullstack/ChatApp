@@ -16,6 +16,10 @@ const connectDB = require("./src/config/db")
 
 connectDB()
 
+console.log("=== فحص المتغيرات البيئية ===");
+console.log("Email:", process.env.Email_Gmail);
+console.log("Password:", process.env.Password_Gmail ? "موجود" : "مش موجود");
+
 const app = require("./src/app")
 
 const port = process.env.PORT || 5000
