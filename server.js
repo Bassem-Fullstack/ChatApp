@@ -5,15 +5,20 @@ const dotenv = require("dotenv")
 
 dotenv.config()
 
-const app = require("./src/app")
 
-const port = process.env.PORT || 5000
+const http = require("http") 
 
+const jwt = require("jsonwebtoken")
+
+const {Server} = require("socket.io")
 
 const connectDB = require("./src/config/db")
 
 connectDB()
 
+const app = require("./src/app")
+
+const port = process.env.PORT || 5000
 
 const Message = require("./src/models/message")
 

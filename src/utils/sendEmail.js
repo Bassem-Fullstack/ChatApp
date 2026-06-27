@@ -5,7 +5,11 @@ const nodemailer = require("nodemailer")
 
 const sendEmail = async(options) => {
 
-
+if (!process.env.Email_Gmail || !process.env.Password_Gmail) {
+    console.error("❌ خطأ حرج: المتغيرات البيئية للإيميل غير مقروءة من السيرفر!");
+    return; 
+  }
+  
  const transPort = nodemailer.createTransport({
 
   // service : "gmail", // اسم سيرفر او خدمة هتبعت على اية بقولوة على جيميل 
