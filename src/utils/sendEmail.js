@@ -5,18 +5,14 @@ const nodemailer = require("nodemailer")
 
 const sendEmail = async(options) => {
 
-if (!process.env.Email_Gmail || !process.env.Password_Gmail) {
-    console.error("❌ خطأ حرج: المتغيرات البيئية للإيميل غير مقروءة من السيرفر!");
-    return; 
-  }
-  
+
  const transPort = nodemailer.createTransport({
 
-  // service : "gmail", // اسم سيرفر او خدمة هتبعت على اية بقولوة على جيميل 
+  service : "gmail", // اسم سيرفر او خدمة هتبعت على اية بقولوة على جيميل 
 
-   host: 'smtp.gmail.com',
+//    host: 'smtp.gmail.com',
 
-  port: 465, // المنفذ الآمن لإرسال الإيميلات
+//   port: 465, // المنفذ الآمن لإرسال الإيميلات
 
   secure: true ,
 
@@ -30,10 +26,10 @@ if (!process.env.Email_Gmail || !process.env.Password_Gmail) {
 
 },
 
-tls: {
-       // السطر ده هو السر! بيمنع السيرفر (Railway) من رفض الاتصال بجوجل بسبب قيود شهادات الـ SSL
-       rejectUnauthorized: false 
-    }
+// tls: {
+//        // السطر ده هو السر! بيمنع السيرفر (Railway) من رفض الاتصال بجوجل بسبب قيود شهادات الـ SSL
+//        rejectUnauthorized: false 
+//     }
 
 
 })   
