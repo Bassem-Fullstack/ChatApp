@@ -94,25 +94,19 @@
 // // module.exports = sendEmail
 
 
-
-
-
-// 1. الاستدعاء الصحيح للمكتبة في الإصدار الجديد
 const Brevo = require('@getbrevo/brevo');
 
 const sendEmail = async (options) => {
+  // 1. افتح قسم إيميلات المعاملات مباشرة
+  const apiInstance = new Brevo.TransactionalEmailsApi();
   
-  // 2. تفعيل خط الاتصال بالمكتبة بالشكل الجديد
-  let defaultClient = Brevo.ApiClient.instance;
-  
-  // 3. تركيب المفتاح السري (API Key)
-  let apiKey = defaultClient.authentications['api-key'];
-  apiKey.apiKey = process.env.BREVO_API_KEY;
+  // 2. مرر الـ API_KEY للحساب بتاعك فوراً
+  apiInstance.setApiKey(Brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY);
 
-  // بقية الكود زي ما هو بالظبط بدون أي تغيير 👇
-  let apiInstance = new Brevo.TransactionalEmailsApi();
-  let sendSmtpEmail = new Brevo.SendSmtpEmail();
+  // 3. جهز ظرف الجواب الفاضي
+  const sendSmtpEmail = new Brevo.SendSmtpEmail();
 
+  // 4. عبّي بيانات الإيميل
   sendSmtpEmail.subject = options.subject; 
   sendSmtpEmail.textContent = options.text; 
   
@@ -123,6 +117,7 @@ const sendEmail = async (options) => {
   
   sendSmtpEmail.to = [{ "email": options.to }];
 
+  // 5. أمر الإرسال الفوري
   await apiInstance.sendTransacEmail(sendSmtpEmail);
 };
 
