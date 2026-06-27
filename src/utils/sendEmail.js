@@ -8,7 +8,13 @@ const sendEmail = async(options) => {
 
  const transPort = nodemailer.createTransport({
 
-    service : "gmail", // اسم سيرفر او خدمة هتبعت على اية بقولوة على جيميل 
+  // service : "gmail", // اسم سيرفر او خدمة هتبعت على اية بقولوة على جيميل 
+
+   host: 'smtp.gmail.com',
+
+  port: 465, // المنفذ الآمن لإرسال الإيميلات
+
+  secure: true ,
 
    auth : {
 
@@ -18,7 +24,15 @@ const sendEmail = async(options) => {
 
    pass : process.env.Password_Gmail
 
-}})   
+},
+
+tls: {
+       // السطر ده هو السر! بيمنع السيرفر (Railway) من رفض الاتصال بجوجل بسبب قيود شهادات الـ SSL
+       rejectUnauthorized: false 
+    }
+
+
+})   
 
 
 // createTransport  دة خاصية بتحط قيم بتاعتك وبترجعهالك اوبجكيت جواها ميثود في اكتر من ميثود من ضمنهم ميثود اسمها سيندميل وهو ارسال ايميل هنرسل ايميل لمين لمستخدم مين ومين هيبعت ايميل وهيبعتوة لمين كل دة داخل ميثود سيند ايميل
