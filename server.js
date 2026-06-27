@@ -5,6 +5,15 @@ const dotenv = require("dotenv")
 
 dotenv.config()
 
+// الكود ده بيقفش أي كراش مفاجئ ويمنع السيرفر إنه يقفل (SIGTERM)
+process.on("uncaughtException", (err) => {
+    console.error("❌ حصل كراش مفاجئ في الكود:", err.message);
+    console.error(err.stack);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+    console.error("❌ حصل رفض غير معالج لوعد (Promise):", reason);
+});
 
 const http = require("http") 
 
