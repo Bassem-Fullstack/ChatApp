@@ -1,9 +1,6 @@
 
 
-
-
 const express = require("express")
-
 
 const app = express()
 
@@ -32,9 +29,6 @@ res.send("Server is working")
 })
 
 
-
-
-
 const UserRouters = require("./routes/authRoutes")
 
 
@@ -53,7 +47,6 @@ app.use("/conv" , ConversationRouters)
 
 ///////////////////////////////////////////////////////////////////////////////////////// 
 
-
 const MessageRouters = require("./routes/messageRoutes")
 
 
@@ -61,7 +54,6 @@ app.use("/messages" , MessageRouters)
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 const UserSearchRouter = require("./routes/userRoutes")
@@ -73,11 +65,9 @@ app.use("/people" , UserSearchRouter)
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
 app.use((req, res) => {
 
-    res.status(404).json({ message: "Route not found" })
+res.status(404).json({ message: "Route not found" })
 
     // دة في حالة لو روتير اللى انت طلبتة مش موجود يعني مستخدم موصلش لهو ساعتها بقي بدل مايظهر اكواد اتشمل للفروند اند يظهر رسالة ان رويت مش موجود
 })
