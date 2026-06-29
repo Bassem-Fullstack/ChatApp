@@ -59,7 +59,7 @@ passPort.authenticate("google" , {scope : ["profile" , "email"] , session : fals
 
 router.get("/google/callback" , 
 
-passPort.authenticate("google" , {failureRedirect : `${CLIENT_URL}/users/login` , session : false }),
+passPort.authenticate("google" , {failureRedirect : `${process.env.CLIENT_URL}/users/login` , session : false }),
 
 
 // دة الرد اللى رجع من جوجل بقولوة لو رد فشل و دية لصفحة لوجين يقوم بسبورد مودية لصفحة لوجين لان رفض تسجيل دخول ورفض  اجيب بياناتة و اخزنها عندي وبقولوة لو رفض خزنهالي في نفس توكين وهجبلك المفتاح السري والايدي بتاع يوسير وخزنهالي في داتا بيز 
