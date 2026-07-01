@@ -18,14 +18,14 @@ const  CreatePrivateChat = asyncHandler(async (req , res) => {
 
 // الباك إند هيكريت المصفوفة بنفسه ويحط (رقمك أنت + رقم الشخص التاني)
 
- if(!members || members.length !==2) {
- 
-   
+
+  if (!otherUserId) {
+
     res.status(400)
 
-    throw new Error ("Private chat needs 2 members only")
- 
-}
+    throw new Error("otherUserId is required")
+    
+  }
 
 
 
