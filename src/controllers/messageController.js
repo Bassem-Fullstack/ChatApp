@@ -32,26 +32,16 @@ const message = await Messages.create({
  content , // رسالة بعتها بنشوفها 
 
 
-}).populate("sender , username email")
+})
 
 
 //  هو كدة خزنلك رسايل مستخدم بالايدي بتاعوة بس احنا عايزين نعرض اسم مستخدم وايميلوة فهمني عشان كدة لما نبعت رد لفروند اند مش هنبعت دة هنبعت بيانات بكل حاجة ومعاة اسم والايميل عشان نظهروة في شات ونبين لمستخدم مين بعت رسالة بظبط
 
 
-const populateMessage = await Messages.populate("sender , username email")
+const populateMessage = await message.populate("sender" , "username email")
 
 res.status(201).json(populateMessage)
 
-// const message = await Messages.create({
- 
-
-//  conversationId , 
-//  sender , // اليوسير بنعرفة من توكين يعني مسجل لوجين عندنا بعت رسالة من خلال  توكين بنعرف مين مستخدم بعت رسالة تلؤتي وسجل
-
-//  content , // رسالة بعتها بنشوفها 
-
-
-// }).populate("sender , username email") لو كتبتها كدة هيطبعلك ايرور لان انت هنا بتكريت لازم تعمل كود منفصل عشان يشتغل بعد ما خزنت حقول خلاص ونبعت رد لفروند اند
 
 
 })
