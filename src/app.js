@@ -13,7 +13,7 @@ const cors = require("cors")
 
 app.use(cors({
 
-origin : ["https://chatapp-production-7953.up.railway.app"] , 
+origin : ["http://localhost:3000" , "https://chatapp-production-7953.up.railway.app"] , 
 
 
 credentials : true 
