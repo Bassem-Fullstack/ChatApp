@@ -13,8 +13,10 @@ const asyncHandler = require("../middleware/asyncHandler")
 const  CreatePrivateChat = asyncHandler(async (req , res) => {
 
 
- const { members } = req.body   
+ const { otherUserId } = req.body   
 
+
+// الباك إند هيكريت المصفوفة بنفسه ويحط (رقمك أنت + رقم الشخص التاني)
 
  if(!members || members.length !==2) {
  
@@ -30,7 +32,9 @@ const  CreatePrivateChat = asyncHandler(async (req , res) => {
 const conversation = await Conversation.create({
 
 
-members ,
+members : [req.user._id  , otherUserId], // احنا كدة خزنة شخص الايدي فاتح تلؤتي مع الشخص الايدي بيكلموة والللى فروند اند يبعتوة نشوف محادثة مابين مين ومين 
+
+// req.user._id دي جت من الاوس 
 
 isGroup : false // هنا انا حددت ان قيمة فولس يعني معناها ان محادثة هتكون مابين اتنين فقط وكمان شرط فوق عاملوة ان محادثة يكون مابين اتنين فقط
 
@@ -57,11 +61,14 @@ const CreateGroupChat = asyncHandler( async( req , res ) => {
 
 const {members , GroupName} = req.body 
 
+ const myId = req.user._id 
+
+ const allMembers = [myId , ...members] // عملت ايدي للمستخدم وعملت سبيرد اوبيرتو عشان نضيف اكتر من مستخدم اكتر من ايدي يعني مثلا ضيفت ايدي بتاع باسم وكمان هنضيف الايدي بتاع باسم بأصحابة بنسخة قديمة وجديدة 
 
 
-if(!members || members.length < 3) {
+if(!allMembers || allMembers.length < 3) {
 
-
+ 
 //  بقولوة لو متغير دة مش بيحتوي على قيمة او بيحتوي على قيمة محادثة لكن دة محادثة اقل من 3 يعني مش محادثة جروبات محادثة بين اتنين فقط ارميلي ايرورر دة
 
  res.status(400)
@@ -74,7 +81,7 @@ if(!members || members.length < 3) {
 const conversation = await Conversation.create({
 
 
-members , 
+members : allMembers ,
 
 GroupName ,
 
